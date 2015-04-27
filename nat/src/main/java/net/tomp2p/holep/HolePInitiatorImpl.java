@@ -39,6 +39,7 @@ public class HolePInitiatorImpl implements HolePInitiator {
 		}
 
 		final HolePStrategy holePuncher = natType().holePuncher(peer, peer.peerBean().holePNumberOfHoles(), idleUDPSeconds, originalMessage);
+		LOG.warn("HolePuncher Object created with Strategy: " + holePuncher.toString());
 		return holePuncher.initiateHolePunch(futureDone, futureResponse);
 	}
 

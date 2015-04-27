@@ -159,7 +159,7 @@ public class HolePTestApp {
 				System.out.println("Sender: " + sender.toString());
 				System.err.println("NATPEER: " + ((String) request));
 				natPeerAddress = sender;
-				return "Hello Successful TomP2P holepunching request";
+				return "Hello! Your Message has been transmitted directly!";
 			}
 		});
 	}
@@ -194,7 +194,7 @@ public class HolePTestApp {
 	public void sendHolePMessage() throws IOException, ClassNotFoundException {
 		setObjectDataReply();
 
-		FutureDirect fd = peer.sendDirect(natPeerAddress).object("Hello World").forceUDP(true).start();
+		FutureDirect fd = peer.sendDirect(natPeerAddress).object("Hello World!").forceUDP(true).start();
 		fd.awaitUninterruptibly();
 
 		if (fd.isSuccess()) {

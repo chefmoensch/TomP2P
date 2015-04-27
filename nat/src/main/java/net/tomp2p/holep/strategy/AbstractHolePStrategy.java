@@ -327,7 +327,7 @@ public abstract class AbstractHolePStrategy implements HolePStrategy {
 							.sender()
 							.sendUDP(createHolePHandler(futures, mainFutureDone, originalFutureResponse), holePFutureResponse, initMessage,
 									future.channelCreator(), idleUDPSeconds, BROADCAST_VALUE);
-					LOG.debug("ChannelFutures successfully created. Initialization of hole punching started.");
+					LOG.warn("Initial message sent to target peer.");
 				} else {
 					mainFutureDone.failed("The creation of the channelCreator for to send the initMessage failed!");
 				}
@@ -453,7 +453,7 @@ public abstract class AbstractHolePStrategy implements HolePStrategy {
 			@Override
 			protected synchronized void channelRead0(final ChannelHandlerContext ctx, final Message msg) throws Exception {
 				if (Message.Type.OK == msg.type() && originalMessage.command() == msg.command()) {
-					LOG.debug("Successfully transmitted the original message to peer:[" + msg.sender().toString()
+					LOG.warn("Successfully transmitted the original message to peer:[" + msg.sender().toString()
 							+ "]. Now here's the reply:[" + msg.toString() + "]");
 					mainFutureDone.done(msg);
 					ctx.close();

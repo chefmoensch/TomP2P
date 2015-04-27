@@ -76,13 +76,13 @@ public class HolePRPC extends DispatchHandler {
 		final NATType type = ((HolePInitiatorImpl) peer.peerBean().holePunchInitiator()).natType();
 		final HolePStrategy holePuncher = type.holePuncher(peer, message.intAt(0), peer.connectionBean().DEFAULT_UDP_IDLE_SECONDS, message);
 		final FutureDone<Message> replyMessage = holePuncher.replyHolePunch();
-		LOG.debug("Hole Punch attempt received. Start reply procedure.");
+		LOG.warn("Hole Punch attempt received. Start reply procedure.");
 		replyMessage.addListener(new BaseFutureAdapter<FutureDone<Message>>() {
 
 			@Override
 			public void operationComplete(FutureDone<Message> future) throws Exception {
 				if (future.isSuccess()) {
-					LOG.debug("Reply procedure successfully done. Now replying port information to HolePInitiator.");
+					LOG.warn("Reply procedure successfully done. Now replying port information to HolePInitiator.");
 					responder.response(future.object());
 				} else {
 					handleFail(message, responder, "Fail while initiating the hole punching");
